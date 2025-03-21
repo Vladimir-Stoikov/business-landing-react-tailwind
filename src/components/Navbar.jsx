@@ -1,25 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi';
 
-
 export default function Navbar() {
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('#home');
 
   const navLinks = [
-    {href: '#home', label: 'Home'},
-    {href: '#about', label: 'About Us'},
-    {href: '#services', label: 'Our Services'},
-    {href: '#testimonials', label: 'Testimonials'},
-  ]
+    { href: '#home', label: 'Home' },
+    { href: '#about', label: 'About Us' },
+    { href: '#services', label: 'Our Services' },
+    { href: '#testimonials', label: 'Testimonials' },
+  ];
 
   function linksHandler(event, navItem) {
     event.preventDefault();
-    if(activeLink !== navItem.href) {
-      console.log(navItem.href);
-      setActiveLink(navItem.href);
-    }
+    console.log(activeLink, navItem.href, navItem.href.slice(1));
+    const section = document.getElementById(navItem.href.slice(1));
+    section ? section.scrollIntoView() : '';
+    if (activeLink === navItem.href) return;
+    setActiveLink(navItem.href);
   }
 
   function menuHandler() {
@@ -37,41 +36,54 @@ export default function Navbar() {
 
         {/* mobile burger menu */}
         <button className='md:hidden p-2' onClick={menuHandler}>
-          {isMenuOpen ? <HiX className='size-6'/> : <HiMenu className='size-6'/>}
+          {isMenuOpen ? <HiX className='size-6' /> : <HiMenu className='size-6' />}
         </button>
 
         {/* navitems */}
         <ul className='hidden md:flex items-center gap-10'>
           {navLinks.map((navItem, index) => {
-            return <li key={index}
-                    className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${ activeLink === navItem.href ? 'text-blue-600 after:w-full' : 'text-gray-600 hover:text-gray-900'}`}
-                    ><a href={navItem.href} onClick={e => linksHandler(e, navItem)}>{navItem.label}</a></li>
+            return (
+              <li
+                key={index}
+                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
+                  activeLink === navItem.href ? 'text-blue-600 after:w-full' : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <a href={navItem.href} onClick={e => linksHandler(e, navItem)}>
+                  {navItem.label}
+                </a>
+              </li>
+            );
           })}
         </ul>
 
         {/* news button */}
         <button className='hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-blue-100'>Get in touch</button>
-
       </div>
 
       {/* burger menu items */}
-      {
-        isMenuOpen && (
-          <nav className='md:hidden bg-white border-t border-gray-100 py-4'>
-            <ul className='container mx-auto px-4 space-y-3'>
-              {navLinks.map((navItem, index) => {
-                return <li key={index} className={`block text-sm font-medium py-2 ${activeLink === navItem.href ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'}`} >
-                  <a href={navItem.href} onClick={e => {
-                    linksHandler(e, navItem);
-                    setIsMenuOpen(false);
-                  }}>{navItem.label}</a></li>
-              })}
-              <button className='w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-blue-100'>Get in touch</button>
-            </ul>
-
-          </nav>
-        )
-      }
+      {isMenuOpen && (
+        <nav className='md:hidden bg-white border-t border-gray-100 py-4'>
+          <ul className='container mx-auto px-4 space-y-3'>
+            {navLinks.map((navItem, index) => {
+              return (
+                <li key={index} className={`block text-sm font-medium py-2 ${activeLink === navItem.href ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'}`}>
+                  <a
+                    href={navItem.href}
+                    onClick={e => {
+                      linksHandler(e, navItem);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    {navItem.label}
+                  </a>
+                </li>
+              );
+            })}
+            <button className='w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-blue-100'>Get in touch</button>
+          </ul>
+        </nav>
+      )}
     </nav>
-  )
+  );
 }
