@@ -14,13 +14,13 @@ export default function PurposeSection() {
 
           {/* bullet points */}
 
-          <div>
+          <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 justify-between gap-8'>
             {purposes.map((purpose, index) => (
-              <div key={index}>
-                <div>{purpose.icon}</div>
+              <div key={index} className='flex space-x-4'>
+                <div className='w-12 h-12 flex items-center justify-start rounded-lg'>{purpose.icon}</div>
                 <div>
-                  <h3>{purpose.title}</h3>
-                  <p>{purpose.description}</p>
+                  <h3 className='text-xl font-semibold text-gray-900 mb-2'>{purpose.title}</h3>
+                  <p className='text-gray-600'>{purpose.description}</p>
                 </div>
               </div>
             ))}
