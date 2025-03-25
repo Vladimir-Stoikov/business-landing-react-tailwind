@@ -25,7 +25,7 @@ export default function ScheduleSection() {
           </p>
           <a href='#' className='text-blue-500 font-semibold items-center gap-2 hover:gap-4 hover:font-bold transition-all flex flex-row'>
             Explore scheduling features
-            <IoIosArrowRoundForward className='size-5' />
+            <IoIosArrowRoundForward className='size-8' />
           </a>
         </div>
       </div>
