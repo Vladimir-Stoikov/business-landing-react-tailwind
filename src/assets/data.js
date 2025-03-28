@@ -33,7 +33,7 @@ export const features = [
   },
 ];
 
-// //   services section
+//   services section
 // const services = [
 //   {
 //     icon: <BsStack className='w-8 h-8 text-indigo-600' />,
