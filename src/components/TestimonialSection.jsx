@@ -24,13 +24,11 @@ export default function TestimonialSection() {
         {/* cards */}
 
         <Swiper
+          modules={[Navigation]}
+          spaceBetween={30}
           navigation={{
             nextEl: '.swiper-button-next-custom',
             prevEl: '.swiper-button-prev-custom',
-          }}
-          spaceBetween={10}
-          pagination={{
-            clickable: true,
           }}
           breakpoints={{
             0: {
@@ -43,26 +41,35 @@ export default function TestimonialSection() {
               slidesPerView: 3,
             },
           }}
-          modules={[Navigation]}
           className='testimonials-swiper md:mb-12'
         >
-          <SwiperSlide>Slide 1</SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
-          <SwiperSlide>Slide 5</SwiperSlide>
-          <SwiperSlide>Slide 6</SwiperSlide>
-          <SwiperSlide>Slide 7</SwiperSlide>
-          <SwiperSlide>Slide 8</SwiperSlide>
-          <SwiperSlide>Slide 9</SwiperSlide>
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide key={index} className='h-full md:py-12 py-4'>
+              <div className='text-center bg-white p-4 rounded-lg shadow-md h-full flex flex-col'>
+                <div className='w-24 h-24 mx-auto mb-4'>
+                  <img src={testimonial.image} alt='testimonial image' className='w-full h-full rounded-full object-cover' />
+                </div>
+
+                <div className='flex justify-center mb-2'>
+                  {[...Array(5)].map((_, starIndex) => (
+                    <span key={starIndex} className='text-yellow-400'>
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <h3 className='text-xl font-semibold mb-3'>{testimonial.name}</h3>
+                <p className='text-gray-600'>{testimonial.text}</p>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
 
         {/* nav btns */}
         <div className='flex justify-center gap-4 mt-8'>
-          <button className='.swiper-button-next-custom w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all cursor-pointer'>
+          <button className='swiper-button-prev-custom w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-blue-500 hover:text-white cursor-pointer transition-colors'>
             <BsChevronLeft className='size-6' />
           </button>
-          <button className='.swiper-button-prev-custom w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all cursor-pointer'>
+          <button className='swiper-button-next-custom w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-blue-500 hover:text-white cursor-pointer transition-colors'>
             <BsChevronRight className='size-6' />
           </button>
         </div>
