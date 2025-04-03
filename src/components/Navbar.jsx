@@ -14,7 +14,6 @@ export default function Navbar() {
 
   function linksHandler(event, navItem) {
     event.preventDefault();
-    console.log(activeLink, navItem.href, navItem.href.slice(1));
     const section = document.getElementById(navItem.href.slice(1));
     section ? section.scrollIntoView() : '';
     if (activeLink === navItem.href) return;
@@ -23,6 +22,15 @@ export default function Navbar() {
 
   function menuHandler() {
     setIsMenuOpen(prev => !prev);
+  }
+
+  function goToVewsletter(e) {
+    e.preventDefault();
+    console.log('click');
+    const newsletterSection = document.getElementById('newsletter');
+    if (newsletterSection) {
+      newsletterSection.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   return (
@@ -58,7 +66,9 @@ export default function Navbar() {
         </ul>
 
         {/* news button */}
-        <button className='hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-blue-100'>Get in touch</button>
+        <button className='hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-blue-100' onClick={e => goToVewsletter(e)}>
+          Get in touch
+        </button>
       </div>
 
       {/* burger menu items */}
@@ -80,7 +90,9 @@ export default function Navbar() {
                 </li>
               );
             })}
-            <button className='w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-blue-100'>Get in touch</button>
+            <button className='w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-blue-100' onClick={e => goToVewsletter(e)}>
+              Get in touch
+            </button>
           </ul>
         </nav>
       )}
